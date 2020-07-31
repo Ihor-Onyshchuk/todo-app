@@ -1,42 +1,25 @@
 import React, { PureComponent } from 'react';
 
-const generateId = () => {
-  return Math.random().toString(36).substring(2)
-    + (new Date()).getTime().toString(36);
-};
+import Search from './components/Search';
+import List from './components/List';
+import AddListItem from './components/List/AddListItem';
+import Modal from './components/Modal';
 
 export default class App extends PureComponent {
   state = {
-    name: '',
     searchText: '',
     todoItems: [],
+    activeItem: null,
+    isModalOpen: false,
+  };
+
+  handleSearch = (searchText) => {
+    this.setState({ searchText });
   }
 
-  onInputChange = (event) => {
-    const label = event.target.name;
-    this.setState({
-      [label]: event.target.value
-    });
-  }
-
-  onSubmit = (event) => {
-    event.preventDefault();
-    this.setState({
-      name: '',
-      todoItems: [
-        {
-          done: false,
-          id: generateId(),
-          name: this.state.name
-        },
-        ...this.state.todoItems
-      ]
-    })
-  }
-
-  handleItemClick = (itemId) => {
+  handleItemChange = (id) => {
     const { todoItems } = this.state;
-    const itemIndex = todoItems.findIndex(({ id }) => id === itemId);
+    const itemIndex = todoItems.findIndex(item => item.id === id);
     const { done, ...restData } = todoItems[itemIndex];
 
     this.setState({
@@ -44,74 +27,82 @@ export default class App extends PureComponent {
         ...todoItems.slice(0, itemIndex),
         { done: !done, ...restData },
         ...todoItems.slice(itemIndex + 1)
-      ]
-    })
+      ],
+    });
   }
 
-  handleItemDelete = (event, itemId) => {
-    event.stopPropagation();
-    const { todoItems } = this.state;
-    const itemIndex = todoItems.findIndex(({ id }) => id === itemId);
+  handleAddItem = (item) => {
     this.setState({
+      searchText: '',
       todoItems: [
-        ...todoItems.slice(0, itemIndex),
-        ...todoItems.slice(itemIndex + 1)
-      ]
-    })
+        ...this.state.todoItems,
+        item,
+      ],
+    });
   }
 
-  handleItemSearch = (todoItems, searchText) => {
-    if (searchText.length === 0) return todoItems;
-    const filteredItems = todoItems.filter(({ name }) => (
-      name.toLowerCase().includes(searchText.toLowerCase())
+  handleConfirmDelete = (item) => {
+    this.setState({
+      activeItem: item,
+      isModalOpen: true,
+    });
+  }
+
+  handleItemDelete = (id) => {
+    const { todoItems } = this.state;
+    const nextTodoItems = todoItems.filter(item => item.id !== id);
+    this.setState({
+      activeItem: null,
+      isModalOpen: false,
+      todoItems: nextTodoItems,
+    });
+  }
+
+  handleModalClose = () => {
+    this.setState({
+      activeItem: null,
+      isModalOpen: false,
+    });
+  }
+
+  handleFilterItems = (query, items) => {
+    if (!query.length) return items;
+    return items.filter(({ name }) => (
+      name.toLowerCase().includes(query.toLowerCase())
     ));
-    return filteredItems;
   }
 
   render() {
-    const { name, todoItems, searchText } = this.state;
-    const filteredItems = this.handleItemSearch(todoItems, searchText);
+    const {
+      todoItems,
+      activeItem,
+      searchText,
+      isModalOpen
+    } = this.state;
+    const filteredItems = this.handleFilterItems(searchText, todoItems);
+
     return (
       <div>
-        <div>
-          <input
-            type="text"
-            name="searchText"
-            value={searchText}
-            onChange={this.onInputChange}
-            placeholder="Enter task name for search"
+        {isModalOpen && (
+          <Modal
+            item={activeItem}
+            onConfirm={this.handleItemDelete}
+            onClose={this.handleModalClose}
           />
-        </div>
-        <ul>
-          {filteredItems && filteredItems.map(({ id, name, done }) => (
-            <li
-              key={id}
-              onClick={() => this.handleItemClick(id)}
-              className={done ? "done" : "active"}
-            >
-              {name}
-              {done && <span>
-                <button onClick={(event) => this.handleItemDelete(event, id)}>
-                  Delete
-                </button>
-              </span>}
-            </li>
-          ))}
-        </ul>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={this.onInputChange}
-          />
-          <button
-            type="submit"
-          >
-            Add Task
-          </button>
-        </form>
+        )}
+        <Search
+          onSearch={this.handleSearch}
+          searchValue={searchText}
+        />
+        <List
+          todos={filteredItems}
+          onDelete={this.handleConfirmDelete}
+          onChange={this.handleItemChange}
+        />
+        <AddListItem
+          onAddItem={this.handleAddItem}
+        />
       </div>
-    )
+    );
   }
 }
