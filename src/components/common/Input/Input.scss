@@ -1,0 +1,13 @@
+.input {
+  line-height: 30px;
+
+  letter-spacing: 1.5px;
+  border: 1px solid lightblue;
+  padding: 5px 10px;
+  border-radius: 6px;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);;
+
+  &:focus {
+    border: 1px solid rgb(41, 167, 209);
+  }
+}

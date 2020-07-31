@@ -1,0 +1,34 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 6px;
+
+  &-input {
+    width: 95%;
+  }
+
+  &-button {
+    width: 10%;
+  }
+
+  &-button {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+
+    &:hover {
+      scale: 1.1;
+    }
+
+    &:active {
+      scale: .95;
+    }
+
+    img {
+      width: inherit;
+    }
+  }
+}

@@ -1,5 +1,8 @@
 import React from 'react';
 import T from 'prop-types';
+import cx from 'classnames';
+
+import './Button.scss';
 
 const Button = ({
   children,
@@ -12,7 +15,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className=""
+      className={cx('button', className)}
     >
       {children}
     </button >

@@ -1,16 +1,25 @@
 import React from 'react';
 import T from 'prop-types';
+import cx from 'classnames';
 
 import Input from '../common/Input';
+import ImgSource from '../../assets/img/close.png'
+import './Search.scss';
 
 const Search = ({ searchValue, onSearch }) => (
-  <div>
+  <div className="search">
     <Input
       value={searchValue}
       onChange={({ target: { value } }) => onSearch(value)}
-      placeholder="Search..."
+      placeholder="Enter task naem for search..."
+      className={cx("search-input")}
     />
-    <span onClick={() => onSearch('')}>X</span>
+    <span
+      className="search-button"
+      onClick={() => onSearch('')}
+    >
+      <img src={ImgSource} alt="close" />
+    </span>
   </div >
 );
 

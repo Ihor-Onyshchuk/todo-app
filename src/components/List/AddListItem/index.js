@@ -3,8 +3,8 @@ import T from 'prop-types';
 
 import Input from '../../common/Input';
 import Button from '../../common/Button';
-
 import { uuid } from '../../../utils/uuid';
+import './AddListItem.scss';
 
 export default class AddListItem extends PureComponent {
   state = {
@@ -39,17 +39,25 @@ export default class AddListItem extends PureComponent {
   render() {
     const { name } = this.state;
     return (
-      <form onSubmit={this.addItem} >
-        <Input
-          onChange={this.onInputChange}
-          value={name}
-        />
-        <Button
-          type="submit"
-          disabled={!this.hasValue}
-        >
-          Add Task
+      <form
+        onSubmit={this.addItem}
+        className="form"
+      >
+        <div className="form-inner">
+          <Input
+            onChange={this.onInputChange}
+            value={name}
+            className="form-input"
+            placeholder="Enter task and press 'Add Task' button"
+          />
+          <Button
+            type="submit"
+            disabled={!this.hasValue}
+            className="form-button"
+          >
+            Add Task
         </Button>
+        </div>
       </form>
     );
   }

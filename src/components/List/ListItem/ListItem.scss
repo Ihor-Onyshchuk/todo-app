@@ -1,0 +1,30 @@
+.todos-item {
+  font-size: 20px;
+
+  min-height: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: rgb(41, 167, 209);
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
+
+  &-button {
+    background-color: none;
+    transition: border-color linear .2s;
+
+    &:hover {
+      border-color: rgb(212, 24, 24);
+    }
+  }
+}
+
+.done {
+  color: rgb(75, 74, 74);
+  background-color: #f7f7f7;
+}

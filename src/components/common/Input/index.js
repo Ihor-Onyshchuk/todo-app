@@ -1,12 +1,16 @@
 import React from 'react';
 import T from 'prop-types';
+import cx from 'classnames';
+
+import './Input.scss';
 
 const Input = props => {
   const {
     onChange,
     value,
     type = "text",
-    placeholder
+    placeholder,
+    className
   } = props;
 
   return (
@@ -16,7 +20,7 @@ const Input = props => {
       type={type}
       placeholder={placeholder}
       autoFocus
-      className=""
+      className={cx('input', className)}
     />
   );
 };
@@ -26,6 +30,7 @@ Input.propTypes = {
   placeholder: T.string,
   onChange: T.func.isRequired,
   value: T.string.isRequired,
+  className: T.string,
 }
 
 export default Input;

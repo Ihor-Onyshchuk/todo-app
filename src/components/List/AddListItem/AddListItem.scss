@@ -1,0 +1,18 @@
+.form {
+  width: 100%;
+  margin-bottom: 20px;
+
+  .form-inner {
+    display: flex;
+    justify-content: space-between;
+
+    .form-input {
+      width: 85%;
+    }
+
+    .form-button {
+      width: 15%;
+      margin-left: 5px;
+    }
+  }
+}

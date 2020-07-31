@@ -1,7 +1,9 @@
 import React from 'react';
 import T from 'prop-types';
+import cx from 'classnames';
 
 import Button from '../../common/Button';
+import './ListItem.scss';
 
 const ListItem = ({
   onChange,
@@ -15,16 +17,17 @@ const ListItem = ({
   return (
     <li
       onClick={() => onChange(id)}
-      className={done ? "done" : "active"}
+      className={cx("todos-item", { 'done': done })}
     >
       {name}
-      {done && <span>
+      {done &&
         <Button
           onClick={handleDelete}
+          className="todos-item-button"
         >
           Delete
         </Button>
-      </span>}
+      }
     </li>
   );
 };

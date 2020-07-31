@@ -82,7 +82,7 @@ export default class App extends PureComponent {
     const filteredItems = this.handleFilterItems(searchText, todoItems);
 
     return (
-      <div>
+      <>
         {isModalOpen && (
           <Modal
             item={activeItem}
@@ -90,19 +90,23 @@ export default class App extends PureComponent {
             onClose={this.handleModalClose}
           />
         )}
-        <Search
-          onSearch={this.handleSearch}
-          searchValue={searchText}
-        />
-        <List
-          todos={filteredItems}
-          onDelete={this.handleConfirmDelete}
-          onChange={this.handleItemChange}
-        />
-        <AddListItem
-          onAddItem={this.handleAddItem}
-        />
-      </div>
+        <div className={isModalOpen ? 'modal-bg' : ''} />
+        <section className="section">
+          <h1 className="title">ToDo app</h1>
+          <Search
+            onSearch={this.handleSearch}
+            searchValue={searchText}
+          />
+          <List
+            todos={filteredItems}
+            onDelete={this.handleConfirmDelete}
+            onChange={this.handleItemChange}
+          />
+          <AddListItem
+            onAddItem={this.handleAddItem}
+          />
+        </section>
+      </>
     );
   }
 }
