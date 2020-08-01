@@ -2,6 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 
 import Button from '../common/Button';
+
 import './Modal.scss';
 
 const Modal = ({
@@ -10,21 +11,16 @@ const Modal = ({
   item: { id, name },
 }) => (
     <div className="modal">
-      <h3 className="modal-title">
-        Are you sure to want delete {name} item?
-      </h3>
-      <Button
-        onClick={() => onConfirm(id)}
-        className="modal-button"
-      >
-        Ok
-      </Button>
-      <Button
-        onClick={onClose}
-        className="modal-button"
-      >
-        Cancel
-      </Button>
+      <div onClick={onClose} className="modal-backdrop" />
+      <div className="modal-content">
+        <h3 className="modal-title">
+          Are you sure to want delete <b>{name}</b>?
+        </h3>
+        <div className="modal-footer">
+          <Button onClick={() => onConfirm(id)}>Ok</Button>
+          <Button onClick={onClose}>Cancel</Button>
+        </div>
+      </div>
     </div>
   );
 

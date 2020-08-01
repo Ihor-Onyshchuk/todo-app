@@ -3,6 +3,7 @@ import T from 'prop-types';
 import cx from 'classnames';
 
 import Button from '../../common/Button';
+
 import './ListItem.scss';
 
 const ListItem = ({
@@ -14,16 +15,19 @@ const ListItem = ({
     event.stopPropagation();
     onDelete({ id, name });
   }
+
   return (
     <li
       onClick={() => onChange(id)}
-      className={cx("todos-item", { 'done': done })}
+      className={cx("todos-item", { done })}
     >
-      {name}
+      <p title={name} className="todos-item-text">
+        {name}
+      </p>
       {done &&
         <Button
           onClick={handleDelete}
-          className="todos-item-button"
+          className="btn-danger btn-remove"
         >
           Delete
         </Button>

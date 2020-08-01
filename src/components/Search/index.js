@@ -3,7 +3,7 @@ import T from 'prop-types';
 import cx from 'classnames';
 
 import Input from '../common/Input';
-import ImgSource from '../../assets/img/close.png'
+
 import './Search.scss';
 
 const Search = ({ searchValue, onSearch }) => (
@@ -11,15 +11,15 @@ const Search = ({ searchValue, onSearch }) => (
     <Input
       value={searchValue}
       onChange={({ target: { value } }) => onSearch(value)}
-      placeholder="Enter task naem for search..."
+      placeholder="Search task..."
       className={cx("search-input")}
     />
-    <span
-      className="search-button"
-      onClick={() => onSearch('')}
-    >
-      <img src={ImgSource} alt="close" />
-    </span>
+    {searchValue && (
+      <span
+        className="search-clear"
+        onClick={() => onSearch('')}
+      />
+    )}
   </div >
 );
 

@@ -9,13 +9,13 @@ const Button = ({
   onClick,
   disabled,
   type = 'button',
-  className,
+  className = 'btn-primary',
 }) => (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={cx('button', className)}
+      className={cx('btn', className)}
     >
       {children}
     </button >
@@ -25,7 +25,7 @@ Button.propTypes = {
   disabled: T.bool,
   type: T.string,
   onClick: T.func,
-  children: T.string.isRequired,
+  children: T.string,
   className: T.string,
 }
 

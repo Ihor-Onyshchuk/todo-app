@@ -4,6 +4,7 @@ import T from 'prop-types';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 import { uuid } from '../../../utils/uuid';
+
 import './AddListItem.scss';
 
 export default class AddListItem extends PureComponent {
@@ -11,9 +12,7 @@ export default class AddListItem extends PureComponent {
     name: "",
   };
 
-  get hasValue() {
-    return !!this.state.name.trim();
-  };
+  hasValue = () => !!this.state.name.trim();
 
   onInputChange = ({ target: { value } }) => {
     this.setState({ name: value });
@@ -24,7 +23,7 @@ export default class AddListItem extends PureComponent {
     const { onAddItem } = this.props;
     const { name } = this.state;
 
-    if (this.hasValue) {
+    if (this.hasValue()) {
       onAddItem(
         {
           done: false,
@@ -43,21 +42,18 @@ export default class AddListItem extends PureComponent {
         onSubmit={this.addItem}
         className="form"
       >
-        <div className="form-inner">
-          <Input
-            onChange={this.onInputChange}
-            value={name}
-            className="form-input"
-            placeholder="Enter task and press 'Add Task' button"
-          />
-          <Button
-            type="submit"
-            disabled={!this.hasValue}
-            className="form-button"
-          >
-            Add Task
+        <Input
+          onChange={this.onInputChange}
+          value={name}
+          className="form-input"
+          placeholder="Enter task name"
+        />
+        <Button
+          type="submit"
+          disabled={!this.hasValue()}
+        >
+          Add Task
         </Button>
-        </div>
       </form>
     );
   }

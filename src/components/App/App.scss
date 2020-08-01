@@ -1,0 +1,27 @@
+.app-container {
+  height: 100%;
+  padding: 30px 15px;
+  margin: 0 auto;
+  max-width: 576px;
+
+  @media (min-width: 992px) {
+    max-width: 768px;
+  }
+
+  .title {
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .application-title {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 40px;
+  }
+
+  .list-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+}

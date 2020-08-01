@@ -6,19 +6,15 @@
   box-sizing: border-box;
 }
 
+html,
 body,
 #root {
   height: 100%;
 }
 
-.section {
-  height: 100%;
-  width: 50%;
-  margin: 20px auto;
-
-  .title {
-    font-size: 30px;
-
-    margin-bottom: 10px;
-  }
+body {
+  min-width: 320px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  background-color: #fcfcfc;
 }

@@ -1,18 +1,32 @@
 .form {
-  width: 100%;
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 
-  .form-inner {
-    display: flex;
-    justify-content: space-between;
+  @media (min-width: 576px) {
+    flex-direction: row;
+    align-items: center;
+  }
+  >
+   {
+    :first-child {
+      width: 100%;
 
-    .form-input {
-      width: 85%;
+      @media (min-width: 576px) {
+        width: unset;
+        flex-grow: 1;
+      }
     }
 
-    .form-button {
-      width: 15%;
-      margin-left: 5px;
+    :last-child {
+      width: 100%;
+      margin-top: 16px;
+
+      @media (min-width: 576px) {
+        width: unset;
+        margin-top: 0;
+        margin-left: 10px;
+        flex-shrink: 0;
+      }
     }
   }
 }

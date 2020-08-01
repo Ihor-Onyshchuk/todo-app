@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
 
-import Search from './components/Search';
-import List from './components/List';
-import AddListItem from './components/List/AddListItem';
-import Modal from './components/Modal';
+import Search from '../Search';
+import List from '../List';
+import AddListItem from '../List/AddListItem';
+import Modal from '../Modal';
+
+import './App.scss';
 
 export default class App extends PureComponent {
   state = {
@@ -74,29 +76,19 @@ export default class App extends PureComponent {
 
   render() {
     const {
-      todoItems,
-      activeItem,
-      searchText,
-      isModalOpen
+      todoItems, activeItem, searchText, isModalOpen
     } = this.state;
     const filteredItems = this.handleFilterItems(searchText, todoItems);
 
     return (
       <>
-        {isModalOpen && (
-          <Modal
-            item={activeItem}
-            onConfirm={this.handleItemDelete}
-            onClose={this.handleModalClose}
-          />
-        )}
-        <div className={isModalOpen ? 'modal-bg' : ''} />
-        <section className="section">
-          <h1 className="title">ToDo app</h1>
+        <section className="app-container">
+          <h1 className="title application-title">ToDo app</h1>
           <Search
             onSearch={this.handleSearch}
             searchValue={searchText}
           />
+          <h3 className="title list-title">Task list</h3>
           <List
             todos={filteredItems}
             onDelete={this.handleConfirmDelete}
@@ -106,6 +98,13 @@ export default class App extends PureComponent {
             onAddItem={this.handleAddItem}
           />
         </section>
+        {isModalOpen && (
+          <Modal
+            item={activeItem}
+            onConfirm={this.handleItemDelete}
+            onClose={this.handleModalClose}
+          />
+        )}
       </>
     );
   }
