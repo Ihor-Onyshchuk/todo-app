@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+    align-items: center;
+  }
+  >
+   {
+    :first-child {
+      width: 100%;
+
+      @media (min-width: 576px) {
+        width: unset;
+        flex-grow: 1;
+      }
+    }
+
+    :last-child {
+      width: 100%;
+      margin-top: 16px;
+
+      @media (min-width: 576px) {
+        width: unset;
+        margin-top: 0;
+        margin-left: 10px;
+        flex-shrink: 0;
+      }
+    }
+  }
+}

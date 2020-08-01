@@ -1,0 +1,41 @@
+.btn {
+  padding: 8px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  border-style: none;
+  border-radius: 6px;
+  transition: background-color linear .15s;
+  cursor: pointer;
+
+  &-danger {
+    border-color: #ff5274;
+    background-color: #ff5274;
+
+    &:focus,
+    &:hover {
+      background-color: #da1f44;
+    }
+  }
+
+  &-primary {
+    border-color: #7f63f4;
+    background-color: #7f63f4;
+
+    &:focus,
+    &:hover {
+      background-color: #5833f1;
+    }
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+}
